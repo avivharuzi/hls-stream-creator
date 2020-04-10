@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Create an M3U8 playlist from media file using FFMPEG",
   "main": "dist/index.js",
-  "types": "dist",
+  "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc"
   },
