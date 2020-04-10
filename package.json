@@ -1,0 +1,30 @@
+{
+  "name": "hls-stream-creator",
+  "version": "1.0.0",
+  "description": "Create an M3U8 playlist from media file using FFMPEG",
+  "main": "dist/index.js",
+  "types": "dist",
+  "scripts": {
+    "build": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/avivharuzi/hls-stream-creator.git"
+  },
+  "keywords": [
+    "hls",
+    "stream",
+    "video"
+  ],
+  "author": "Aviv Haruzi <avivharuzi@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/avivharuzi/hls-stream-creator/issues"
+  },
+  "homepage": "https://github.com/avivharuzi/hls-stream-creator#readme",
+  "devDependencies": {
+    "@types/node": "^13.11.1",
+    "ts-node": "^8.8.2",
+    "typescript": "^3.8.3"
+  }
+}
