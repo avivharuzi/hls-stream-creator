@@ -45,7 +45,7 @@ export default async (src: string, targetDir: string, settings: Settings = {}): 
     const bandwidth = `${rendition.bitrate}000`;
     const name = `${rendition.resolution.height}p`;
 
-    renditionsCmd += ` -c:a ${settings.audioCodec} -c:v ${settings.videoCodec} -preset ${settings.speed} -sc_threshold 0 -g ${keyFramesInterval} -keyint_min ${keyFramesInterval} -hls_time ${config.SEGMENT_TARGET_DURATION} -hls_playlist_type vod`;
+    renditionsCmd += ` -c:v ${settings.videoCodec} -c:a ${settings.audioCodec} -preset ${settings.speed} -sc_threshold 0 -g ${keyFramesInterval} -keyint_min ${keyFramesInterval} -hls_time ${config.SEGMENT_TARGET_DURATION} -hls_playlist_type vod`;
     renditionsCmd += ` -vf scale=w=${rendition.resolution.width}:h=${rendition.resolution.height}:force_original_aspect_ratio=decrease`;
     renditionsCmd += ` -b:v ${rendition.bitrate}k -maxrate ${maxrate}k -bufsize ${bufsize}k -b:a ${rendition.audioRate}k`;
     renditionsCmd += ` -hls_segment_filename ${targetDir}/${name}_%03d.ts ${targetDir}/${name}.m3u8`;
