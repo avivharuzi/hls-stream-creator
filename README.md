@@ -54,6 +54,79 @@ const hlsStreamCreator = require('hls-stream-creator');
 })();
 ```
 
+## API
+
+### hlsStreamCreator(src, targetDir, settings?)
+
+Returns a `Promise<void>`.
+
+#### src
+
+Type: `string`
+
+Media file.
+
+If media file does not exists will be thrown an error.
+
+#### targetDir
+
+Type: `string`
+
+Destination directory which will hold all the mpeg-ts files with m3u8 files.
+
+#### settings
+
+Type: `object`
+
+In addition, you can specify the below options.
+
+##### renditions
+
+Type:
+```js
+{
+  resolution: {
+    width: number, // example: 1920
+    height: number, // example: 1080
+  },
+  bitrate: number, // example: 8000
+  audioRate: number, // example: 320
+}
+```
+Default: `[]`
+
+Must be at least one rendition if not will be thrown an error.
+
+##### speed
+
+Type: `Speed | string`\
+Default: `veryfast`
+
+The speed will be for making the stream files.
+
+Can be: `'ultrafast' || 'superfast' || 'veryfast' || 'faster' || 'fast' || 'medium' || 'slow' || 'slower' || 'veryslow'`
+
+##### videoCodec
+
+Type: `string`\
+Default: `libx264`
+
+Recommended not to change this value because the default value **libx264** is supported in all browsers.
+
+##### audioCodec
+
+Type: `string`\
+Default: `aac`
+
+Recommended not to change this value because the default value **aac** is supported in all browsers.
+
+##### printLogs
+
+Type: `boolean`\
+Default: `true`
+
+In case we want to see the process logs of ffmpeg.
+
 # License
 
 [MIT](LICENSE)
