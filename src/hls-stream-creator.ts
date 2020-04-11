@@ -57,16 +57,16 @@ export default async (src: string, targetDir: string, settings: Settings = {}): 
       .audioCodec(settings.audioCodec)
       .audioBitrate(rendition.audioRate)
       .addOutputOptions([
+        `-maxrate ${maxrate}k`, // Video output option.
+        `-bufsize ${bufsize}k`, // Video output option.
+        `-vf scale=w=${rendition.resolution.width}:h=${rendition.resolution.height}:force_original_aspect_ratio=decrease`, // Video output option.
         `-preset ${settings.speed}`,
         '-sc_threshold 0',
         `-g ${keyFramesInterval}`,
         `-keyint_min ${keyFramesInterval}`,
-        `-hls_time ${config.SEGMENT_TARGET_DURATION}`,
-        '-hls_playlist_type vod',
-        `-vf scale=w=${rendition.resolution.width}:h=${rendition.resolution.height}:force_original_aspect_ratio=decrease`,
-        `-maxrate ${maxrate}k`,
-        `-bufsize ${bufsize}k`,
-        `-hls_segment_filename ${targetDir}/${name}_%03d.ts`,
+        `-hls_time ${config.SEGMENT_TARGET_DURATION}`, // HLS output option.
+        '-hls_playlist_type vod', // HLS output option.
+        `-hls_segment_filename ${targetDir}/${name}_%03d.ts`, // HLS output option.
       ]);
 
     // Add rendition entry in the master playlist.
