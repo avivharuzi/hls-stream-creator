@@ -83,7 +83,7 @@ In addition, you can specify the below options.
 ##### renditions
 
 Type:
-```js
+```text
 {
   resolution: {
     width: number, // example: 1920

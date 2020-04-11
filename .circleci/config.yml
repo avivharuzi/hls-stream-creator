@@ -1,0 +1,25 @@
+version: 2.1
+orbs:
+  node: circleci/node@1.1.6
+jobs:
+  build-and-test:
+    executor:
+      name: node/default
+    steps:
+      - checkout
+      - run: wget https://johnvansickle.com/ffmpeg/releases/ffmpeg-release-amd64-static.tar.xz
+      - run: tar xf ffmpeg-release-amd64-static.tar.xz
+      - run: mkdir -p $HOME/bin
+      - run: cp ffmpeg-*-static/{ffmpeg,ffprobe} $HOME/bin
+      - run: cp ffmpeg-*-static/{ffmpeg,ffprobe} $(pwd)
+      - run: export PATH=$(pwd)/bin:$PATH
+      - run: export ALT_FFMPEG_PATH=$(pwd)/ffmpeg
+      - run: export ALT_FFPROBE_PATH=$(pwd)/ffprobe
+      - node/with-cache:
+          steps:
+            - run: npm install
+            - run: npm test
+workflows:
+  build-and-test:
+    jobs:
+      - build-and-test
