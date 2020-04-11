@@ -4,8 +4,4 @@ node_js:
 os:
   - linux
 before_install:
-  - apt-get install -y ffmpeg
-  - ffmpeg -hwaccels
-install:
-  - npm install
-script: npm test
+  - apt-get install ffmpeg
