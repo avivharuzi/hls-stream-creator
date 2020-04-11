@@ -105,3 +105,6 @@ dist
 
 # IDEs and editors
 .idea/
+
+# Test assets output files
+test/assets/output
