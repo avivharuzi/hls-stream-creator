@@ -3,7 +3,7 @@ import { Speed } from './Speed';
 
 export interface Settings {
   renditions?: Rendition[];
-  speed?: Speed;
+  speed?: Speed | string;
   videoCodec?: string;
   audioCodec?: string;
   printLogs?: boolean;
