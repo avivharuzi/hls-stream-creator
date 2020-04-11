@@ -6,7 +6,8 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc",
-    "test": "mocha"
+    "test": "mocha",
+    "publish": "npm test && npm run build && npm publish"
   },
   "files": [
     "dist"
