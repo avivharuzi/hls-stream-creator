@@ -8,6 +8,8 @@ export default async (target: string): Promise<void> => {
         fs.mkdir(target, (err) => {
           if (err) {
             reject(`Could not create directory: ${target}, err: ${err}`);
+          } else {
+            resolve();
           }
         });
       } else if (!stats.isDirectory()) {
