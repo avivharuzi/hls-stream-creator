@@ -8,3 +8,7 @@ export default hlsStreamCreator;
 export {
   hlsStreamCreator,
 };
+
+// For CommonJS default export support.
+module.exports = hlsStreamCreator;
+module.exports.default = hlsStreamCreator;
