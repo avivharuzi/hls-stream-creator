@@ -7,7 +7,7 @@
   "scripts": {
     "build": "tsc",
     "test": "mocha",
-    "publish": "npm test && npm run build && npm publish"
+    "publish": "npm test && npm run build && npm publish --access public"
   },
   "files": [
     "dist"
