@@ -1,5 +1,7 @@
 # HLS Stream Creator - Node.js
 
+![NPM](https://img.shields.io/npm/l/hls-stream-creator.svg) ![GitHub package.json version](https://img.shields.io/github/package-json/v/avivharuzi/hls-stream-creator.svg) ![CircleCI](https://img.shields.io/circleci/build/github/avivharuzi/hls-stream-creator/master)
+
 Create an M3U8 playlist from media file using FFMPEG.
 
 ## Installation
