@@ -5,9 +5,9 @@ export default async (src: string): Promise<FfprobeData> => {
     ffprobe(src, (err, metadata) => {
       if (err) {
         reject(err);
+      } else {
+        resolve(metadata);
       }
-
-      resolve(metadata);
     });
   });
 }

@@ -5,9 +5,9 @@ export default async (command: string): Promise<void> => {
     exec(command, (err) => {
       if (err) {
         reject(err);
+      } else {
+        resolve();
       }
-
-      resolve();
     });
   });
 };
