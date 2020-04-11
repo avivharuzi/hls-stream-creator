@@ -1,3 +1,4 @@
+import chalk from 'chalk';
 import { FfmpegCommand } from 'fluent-ffmpeg';
 
 export default async (ffmpegCommand: FfmpegCommand, printLogs: boolean = true): Promise<void> => {
@@ -8,11 +9,11 @@ export default async (ffmpegCommand: FfmpegCommand, printLogs: boolean = true): 
 
     if (printLogs) {
       ffmpegCommand.on('stderr', (stderrLine) => {
-        console.log(stderrLine);
+        console.log(chalk.yellow(stderrLine));
       });
 
       ffmpegCommand.on('progress', (progress) => {
-        console.log(`Processing: ${progress.percent}% done`);
+        console.log(chalk.green(`Processing: ${progress.percent}% done`));
       });
     }
 
