@@ -1,4 +1,4 @@
-# HLS Stream Creator for Node.js
+# HLS Stream Creator - Node.js
 
 Create an M3U8 playlist from media file using FFMPEG.
 
@@ -10,7 +10,7 @@ npm i hls-stream-creator
 
 ## Prerequisites
 
-This package using fluent-ffmpeg so ffmpeg must be installed it requires at least ffmpeg 0.9 to work.
+This package using fluent-ffmpeg so **ffmpeg** must be installed it requires at least ffmpeg 0.9 to work.
 
 You must also have ffprobe installed (it comes with ffmpeg in most distributions).
 
