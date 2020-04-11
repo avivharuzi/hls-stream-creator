@@ -5,4 +5,5 @@ export const defaultSettings: Settings = {
   speed: Speed.VeryFast,
   videoCodec: 'libx264',
   audioCodec: 'aac',
+  printLogs: true,
 };

@@ -1,3 +1,5 @@
+import ffmpeg, { FfmpegCommand } from 'fluent-ffmpeg';
+
 import * as utils from './utils';
 import config from './config';
 import { defaultSettings } from './default-settings';
@@ -36,7 +38,9 @@ export default async (src: string, targetDir: string, settings: Settings = {}): 
   // @ts-ignore
   const keyFramesInterval = utils.fps(videoStreamMetadata) * 2;
 
-  let renditionsCmd = '';
+  let ffmpegCommand: FfmpegCommand = ffmpeg(src)
+    .addInputOption('-hide_banner -y');
+
   let masterPlaylistData = '#EXTM3U\n#EXT-X-VERSION:3\n';
 
   settings.renditions.forEach(rendition => {
@@ -45,16 +49,31 @@ export default async (src: string, targetDir: string, settings: Settings = {}): 
     const bandwidth = `${rendition.bitrate}000`;
     const name = `${rendition.resolution.height}p`;
 
-    renditionsCmd += ` -c:v ${settings.videoCodec} -c:a ${settings.audioCodec} -preset ${settings.speed} -sc_threshold 0 -g ${keyFramesInterval} -keyint_min ${keyFramesInterval} -hls_time ${config.SEGMENT_TARGET_DURATION} -hls_playlist_type vod`;
-    renditionsCmd += ` -vf scale=w=${rendition.resolution.width}:h=${rendition.resolution.height}:force_original_aspect_ratio=decrease`;
-    renditionsCmd += ` -b:v ${rendition.bitrate}k -maxrate ${maxrate}k -bufsize ${bufsize}k -b:a ${rendition.audioRate}k`;
-    renditionsCmd += ` -hls_segment_filename ${targetDir}/${name}_%03d.ts ${targetDir}/${name}.m3u8`;
+    ffmpegCommand = ffmpegCommand
+      .addOutput(`${targetDir}/${name}.m3u8`)
+      // @ts-ignore
+      .videoCodec(settings.videoCodec)
+      .videoBitrate(rendition.bitrate)
+      .audioCodec(settings.audioCodec)
+      .audioBitrate(rendition.audioRate)
+      .addOutputOptions([
+        `-preset ${settings.speed}`,
+        '-sc_threshold 0',
+        `-g ${keyFramesInterval}`,
+        `-keyint_min ${keyFramesInterval}`,
+        `-hls_time ${config.SEGMENT_TARGET_DURATION}`,
+        '-hls_playlist_type vod',
+        `-vf scale=w=${rendition.resolution.width}:h=${rendition.resolution.height}:force_original_aspect_ratio=decrease`,
+        `-maxrate ${maxrate}k`,
+        `-bufsize ${bufsize}k`,
+        `-hls_segment_filename ${targetDir}/${name}_%03d.ts`,
+      ]);
 
     // Add rendition entry in the master playlist.
     masterPlaylistData += `#EXT-X-STREAM-INF:BANDWIDTH=${bandwidth},RESOLUTION=${rendition.resolution.width}x${rendition.resolution.height}\n${name}.m3u8\n`;
   });
 
-  await utils.exec(`ffmpeg -hide_banner -y -i ${src} ${renditionsCmd}`);
+  await utils.ffmpegRun(ffmpegCommand, settings.printLogs);
 
   // Finally create playlist file.
   await utils.createFile(`${targetDir}/playlist.m3u8`, masterPlaylistData);

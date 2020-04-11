@@ -6,4 +6,5 @@ export interface Settings {
   speed?: Speed;
   videoCodec?: string;
   audioCodec?: string;
+  printLogs?: boolean;
 }
