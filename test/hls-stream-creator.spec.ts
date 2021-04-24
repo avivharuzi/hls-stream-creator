@@ -1,6 +1,6 @@
 import * as assert from 'assert';
 import * as fse from 'fs-extra';
-import path from 'path';
+import * as path from 'path';
 
 import hlsStreamCreator, { Settings } from '../src';
 
