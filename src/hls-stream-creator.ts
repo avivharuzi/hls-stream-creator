@@ -54,6 +54,7 @@ export default async (src: string, targetDir: string, settings: Settings = {}): 
       // @ts-ignore
       .videoCodec(settings.videoCodec)
       .videoBitrate(rendition.bitrate)
+      // @ts-ignore
       .audioCodec(settings.audioCodec)
       .audioBitrate(rendition.audioRate)
       .addOutputOptions([
